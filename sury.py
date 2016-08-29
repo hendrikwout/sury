@@ -21,7 +21,7 @@ def sury(alb=0.101,\
     Purpose: SURY converts urban canopy parameters - containing the three-dimensional 
 	     information such as from WUDAPT - into bulk parameters. It can be used 
 	     with existing bulk urban land-surface schemes for providing canopy-
-	     dependent urban physics to atmospheric modelling with a low computation cost.
+	     dependent urban physics in atmospheric modelling with a low computation cost.
              
     Reference:
              Wouters, H., Demuzere, M., Blahak, U., Fortuniak, K., Maiheu., B., 
