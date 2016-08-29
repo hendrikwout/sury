@@ -1,4 +1,3 @@
-from numpy import exp,amin,zeros_like
 
 def sury(alb=0.101,\
          emi=0.86,\
@@ -17,8 +16,10 @@ def sury(alb=0.101,\
          **kwargs):
 
     """
-    Purpose: SURY converts urban canopy parameters – containing the three-dimensional 
-	     information such as from WUDAPT – into bulk parameters. It can be used 
+    Title:   SURY: the Semi-empirical URban canopY parametrization
+
+    Purpose: SURY converts urban canopy parameters - containing the three-dimensional 
+	     information such as from WUDAPT - into bulk parameters. It can be used 
 	     with existing bulk urban land-surface schemes for providing canopy-
 	     dependent urban physics to atmospheric modelling with a low computation cost.
              
@@ -101,6 +102,7 @@ def sury(alb=0.101,\
         sury.sury(h = 20., htw = 10., roof_f = 0.5)
 
     """
+    from numpy import exp,amin,zeros_like
 
     if htw > 2.0:
         print('Warning, specified canyon height-to-width-ratio falls outside of validity range. In order to extend the formulation, please contact the author.')
