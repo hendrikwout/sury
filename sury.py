@@ -17,14 +17,17 @@ def sury(alb=0.101,\
          **kwargs):
 
     """
-    Purpose: Derive bulk parameters from urban-canopy parameters according
-             the Semi-Empirical URban canopY parametrization (SURY).  
-
+    Purpose: SURY converts urban canopy parameters – containing the three-dimensional 
+	     information such as from WUDAPT – into bulk parameters. It can be used 
+	     with existing bulk urban land-surface schemes for providing canopy-
+	     dependent urban physics to atmospheric modelling with a low computation cost.
+             
     Reference:
              Wouters, H., Demuzere, M., Blahak, U., Fortuniak, K., Maiheu., B., 
              Camps, J., Tielemans, and N. P. M. van Lipzig, 2016.  The efficient
              urban-canopy dependency parametrization SURY (v1.0) for atmospheric modelling:
-             description and application with the COSMO-CLM model (v5.0_clm6) for a Belgian Summer, Geosci. Model Dev., 2016.
+             description and application with the COSMO-CLM model (v5.0_clm6) for a 
+             Belgian Summer, Geosci. Model Dev., 2016.
 
     Version: 1.0
 
@@ -132,17 +135,17 @@ def sury(alb=0.101,\
         alb_roof_snow   = kwargs['alb_roof']  *(1. - snow_f) +  alb_snow* snow_f
         alb_road_snow = kwargs['alb_road']*(1. - snow_f) +  alb_snow* snow_f
         alb_wall_snow   = kwargs['alb_wall']  *(1. - snow_f) +  alb_snow* snow_f
-        alb_bulk = (alb_road_snow  + 2. *htw * alb_wall_snow )/ (1.+2. * htw) * psi_canyon * (1. - roof_f) + alb_roof_snow * roof_f 
+        alb_bulk = (alb_road_snow  + 2. *htw * alb_wall_snow )/(1.+2. * htw) * psi_canyon * (1. - roof_f) + alb_roof_snow * roof_f 
 
     else:
         alb_bulk = ((1.-snow_f) * alb + snow_f * alb_snow) * psi_bulk
 
 
     if ('emi_roof' in kwargs.keys()) or ('emi_wall' in kwargs.keys()) or ('emi_road' in kwargs.keys()):
-        albth_roof_snow   = (1.-kwargs['emi_roof'])  *(1. - snow_f) + (1.-alb_snow)   * snow_f
-        albth_road_snow = (1.-kwargs['emi_road'])*(1. - snow_f) + (1. -  emi_snow)* snow_f
-        albth_wall_snow   = (1.-kwargs['emi_wall'])  *(1. - snow_f) + (1.-emi_snow)   * snow_f
-        emi_bulk = 1. - ((albth_road_snow  + 2. *htw * albth_wall_snow )/ (1.+2. * htw) * psi_canyon * (1. - roof_f) + albth_roof_snow * roof_f )
+        albth_roof_snow   = (1.-kwargs['emi_roof']) * (1. - snow_f) + (1. - alb_snow) * snow_f
+        albth_road_snow   = (1.-kwargs['emi_road']) * (1. - snow_f) + (1. - emi_snow)* snow_f
+        albth_wall_snow   = (1.-kwargs['emi_wall'])  *(1. - snow_f) + (1. - emi_snow) * snow_f
+        emi_bulk = 1. - ((albth_road_snow  + 2. *htw * albth_wall_snow )/(1.+2. * htw) * psi_canyon * (1. - roof_f) + albth_roof_snow * roof_f)
 
     else:
          emi_bulk = 1. - psi_bulk*(1. - ((1. - snow_f) * emi + snow_f * emi_snow))
